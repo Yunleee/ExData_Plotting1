@@ -12,9 +12,9 @@ subSetData <- rbind(subSetData1, subSetData2)
 datetime <- paste(subSetData$Date,subSetData$Time)
 Datetime <- as.POSIXlt (strptime(datetime, "%Y-%m-%d %H:%M:%S"))
 globalActivePower <- as.numeric(subSetData$Global_active_power)
-png("plot_2.png", width=480, height=480)
-plot(Datetime, globalActivePower,type= "l",xaxt="n", ylab = "Global Active Power (kilowatts)")
-axis(side=1, labels=c("Thursday", "Friday", "Saturday"), at=(1,1440,2879))
-
+png("plot2.png", width=480, height=480)
+plot(globalActivePower,type= "l",xaxt="n", ylab = "Global Active Power (kilowatts)")
+axis(side=1, labels=c("Thursday", "Friday", "Saturday"), at =c(1,1440,2879))
 dev.off()
+
 

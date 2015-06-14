@@ -9,16 +9,17 @@ subSetData2 <- fulldata[which(fulldata$Date =="2007-02-02"),]
 subSetData <- rbind(subSetData1, subSetData2)
 
 ##string(subSetData)
-datetime <- strptime(paste(subSetData$Date, subSetData$Time, sep=" "), "%d/%m/%Y %H:%M:%S") 
+datetime <- paste(subSetData$Date,subSetData$Time)
+Datetime <- as.POSIXlt (strptime(datetime, "%Y-%m-%d %H:%M:%S")) 
 globalActivePower <- as.numeric(subSetData$Global_active_power)
 subMetering1 <- as.numeric(subSetData$Sub_metering_1)
 subMetering2 <- as.numeric(subSetData$Sub_metering_2)
 subMetering3 <- as.numeric(subSetData$Sub_metering_3)
 
 png("plot3.png", width=480, height=480)
-plot(factor(datetime), subMetering1, type="l", ylab="Energy Submetering", xlab="")
-lines(datetime, subMetering2, type="l", col="red")
-lines(datetime, subMetering3, type="l", col="blue")
+plot(Datetime, subMetering1, type="l", ylab="Energy Submetering", xlab="")
+lines(Datetime, subMetering2, type="l", col="red")
+lines(Datetime, subMetering3, type="l", col="blue")
 legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lty=1, lwd=2.5, col=c("black", "red", "blue"))
 dev.off()
 
